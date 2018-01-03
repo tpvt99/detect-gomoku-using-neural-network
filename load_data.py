@@ -81,6 +81,7 @@ def load_data():
         test_results = np.append(test_results, 2)
 
     training_data = list(zip(training_inputs, training_results))
+    #print(training_data)
     test_data = list(zip(test_inputs, test_results))
     return (training_data, test_data)
 

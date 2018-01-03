@@ -16,26 +16,14 @@ real_horizontal_lines_angle = []
 row = 0
 column = 0
 
-real_col = 8
-real_row = 8
+real_col = 10
+real_row = 10
 # ----------------------------------------- #
 # ----------------------------------------- #
 crop_width = 10
 
 sss_num = 1536
 
-def preprocess(gray):
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
-    dilated = cv2.morphologyEx(gray, cv2.MORPH_DILATE, kernel)
-    diff1 = 255 - cv2.subtract(dilated, gray)
-
-    median = cv2.medianBlur(dilated, 15)
-    diff2 = 255 - cv2.subtract(median, gray)
-
-    normed = cv2.normalize(diff2, None, 0, 255, cv2.NORM_MINMAX)
-
-    res = np.hstack((gray, dilated, diff1, median, diff2, normed))
-    return normed
 
 def trim(im):
     bg = Image.new(im.mode, im.size, im.getpixel((10,10)))
@@ -259,9 +247,10 @@ def draw_real_matrix(matrix, image):
 
 if __name__ == '__main__':
     # first is capture image
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     while True:
         ret, frame = cap.read()
+        frame = cv2.imread('100-blocks-1.png')
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         gray = preprocess(img)
