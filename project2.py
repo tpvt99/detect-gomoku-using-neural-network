@@ -161,7 +161,7 @@ def draw_real_matrix(matrix, image):
 
 if __name__ == '__main__':
     # first is capture image
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     while True:
         ret, frame = cap.read()
         img = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
